@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+# 引入正则表达式
+import re
+
 
 
 r = requests.get("https://python123.io/ws/demo.html")
@@ -57,11 +60,21 @@ soup.a.previous_sibling
 # 加s也可获取所有结点从而进行遍历
 
 
+# 信息查找与提取
+# find_all: 参数：1.检索参数的名字，可为['a', 'b']， 2.属性值检索(字符信息)
+# 3.是否默认搜索子孙结点，为false则只搜索儿子， 4.对标签中间的字符串区域进行检索
+for link in soup.find_all('a'):
+    print(link.get('herf'))
 
 
+# 查找以b开头的（正则表达式：给出部分进行搜索）
+for tag in soup.find_all(re.compile('b')):
+    print(tag.name)
 
 
-
-
+soup.find_all('p', 'course')
+soup.find_all(id = 'link1')
+soup.find_all(string = 'Basic Python')
+# a() = a.find_all()
 
 
